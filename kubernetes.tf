@@ -1,3 +1,12 @@
+variable "access_token"{
+  type = string 
+}
+
+provider "google" {
+  project = "syndeno"
+  region  = "europe-west4"
+  access_token = var.access_token
+}
 terraform {
   required_providers {
     google = {
