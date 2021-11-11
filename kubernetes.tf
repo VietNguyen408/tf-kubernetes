@@ -21,7 +21,7 @@ terraform {
 }
 
 data "google_service_account_access_token" "my_kubernetes_sa" {
-  target_service_account = "terraform@syndeno.iam.gserviceaccount.com"
+  target_service_account = "790131216438-compute@developer.gserviceaccount.com"
   scopes                 = ["userinfo-email", "cloud-platform"]
   lifetime               = "3600s"
 }
