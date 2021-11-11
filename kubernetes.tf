@@ -20,11 +20,11 @@ terraform {
   }
 }
 
-data "google_service_account_access_token" "my_kubernetes_sa" {
-  target_service_account = "viet-nguyen@syndeno.iam.gserviceaccount.com"
-  scopes                 = ["userinfo-email", "cloud-platform"]
-  lifetime               = "3600s"
-}
+#data "google_service_account_access_token" "my_kubernetes_sa" {
+#  target_service_account = "viet-nguyen@syndeno.iam.gserviceaccount.com"
+#  scopes                 = ["userinfo-email", "cloud-platform"]
+#  lifetime               = "3600s"
+#}
 
 data "google_container_cluster" "my_cluster" {
   name     = "syndeno"
