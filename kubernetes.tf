@@ -40,6 +40,7 @@ provider "kubernetes" {
 resource "kubernetes_deployment" "test" {
   metadata {
     name = "pageview-deploy"
+    namespace = "viet"
   }
   spec {
     replicas = 3
@@ -67,6 +68,7 @@ resource "kubernetes_deployment" "test" {
 resource "kubernetes_service" "test" {
   metadata {
     name = "pageview-svc"
+    namespace = "viet"
   }
   spec {
     selector = {
