@@ -23,7 +23,7 @@ terraform {
   backend "gcs" {
     bucket = "tf-viet-testing"
     prefix = "tfstate-kubernetes"
-    access_token = var.access_token
+    #access_token = var.access_token
   }
 }
 
