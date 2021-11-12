@@ -19,6 +19,12 @@ terraform {
       version = ">= 2.0.0"
     }
   }
+
+  backend "gcs" {
+    bucket = "tf-viet-testing"
+    prefix = "tfstate-kubernetes"
+    access_token = var.access_token
+  }
 }
 
 data "google_client_config" "provider" {}
