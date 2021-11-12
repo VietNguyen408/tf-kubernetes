@@ -1,12 +1,13 @@
-variable "access_token"{
-  type = string 
+variable "access_token" {
+  type = string
 }
 
 provider "google" {
-  project = "syndeno"
-  region  = "europe-west4"
+  project      = "syndeno"
+  region       = "europe-west4"
   access_token = var.access_token
 }
+
 terraform {
   required_providers {
     google = {
@@ -19,12 +20,13 @@ terraform {
     }
   }
 }
-
+/*
 data "google_service_account_access_token" "my_kubernetes_sa" {
   target_service_account = "viet-nguyen@syndeno.iam.gserviceaccount.com"
   scopes                 = ["userinfo-email", "cloud-platform"]
   lifetime               = "3600s"
 }
+
 
 data "google_container_cluster" "my_cluster" {
   name     = "syndeno"
@@ -38,7 +40,7 @@ provider "kubernetes" {
     data.google_container_cluster.my_cluster.master_auth[0].cluster_ca_certificate,
   )
 }
-
+*/
 resource "kubernetes_deployment" "test" {
   metadata {
     name = "pageview-deploy"
