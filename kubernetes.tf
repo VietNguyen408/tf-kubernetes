@@ -8,6 +8,17 @@ provider "google" {
   access_token = var.access_token
 }
 
+data "terraform_remote_state" "project_id" {
+  backend   = "gcs"
+  workspace = "${terraform.workspace}"
+
+  config = {
+    bucket = "${var.bucket_name}"
+    prefix = "${var.prefix_project}"
+    access_token = "${var.accesstoken}"  <- added
+  }
+}
+
 terraform {
   required_providers {
     google = {
