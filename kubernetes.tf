@@ -1,5 +1,5 @@
 variable "access_token" {
-  type = "string"
+  type = string
 }
 
 provider "google" {
