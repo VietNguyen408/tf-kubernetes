@@ -23,10 +23,24 @@ terraform {
   backend "gcs" {
     bucket = "tf-viet-testing"
     prefix = "tfstate-kubernetes"
-    //access_token = "${access_token}"
   }
 }
 
+data "terraform_remote_state" "foo" {
+  backend = "gcs"
+  config = {
+    bucket = "tf-viet-testing"
+    prefix = "tfstate-kubernetes"
+  }
+}
+
+resource "template_file" "bar" {
+  template = "${greeting}"
+
+  vars {
+    greeting = "${data.terraform_remote_state.foo.greeting}"
+  }
+}
 data "google_client_config" "provider" {}
 
 
@@ -43,9 +57,11 @@ provider "kubernetes" {
   )
 }
 
+
+
 resource "kubernetes_deployment" "test" {
   metadata {
-    name = "pageview-deploy"
+    name      = "pageview-deploy"
     namespace = "viet"
   }
   spec {
@@ -73,7 +89,7 @@ resource "kubernetes_deployment" "test" {
 
 resource "kubernetes_service" "test" {
   metadata {
-    name = "pageview-svc"
+    name      = "pageview-svc"
     namespace = "viet"
   }
   spec {
