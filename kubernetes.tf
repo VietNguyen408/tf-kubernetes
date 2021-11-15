@@ -23,24 +23,13 @@ terraform {
   backend "gcs" {
     bucket = "tf-viet-testing"
     prefix = "tfstate-kubernetes"
+
+    workspaces {
+      name = "viet-kubernetes"
+    }
   }
 }
 
-data "terraform_remote_state" "foo" {
-  backend = "gcs"
-  config = {
-    bucket = "tf-viet-testing"
-    prefix = "tfstate-kubernetes"
-  }
-}
-
-resource "template_file" "bar" {
-  template = "${greeting}"
-
-  vars {
-    greeting = "${data.terraform_remote_state.foo.greeting}"
-  }
-}
 data "google_client_config" "provider" {}
 
 
