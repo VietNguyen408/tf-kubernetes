@@ -23,10 +23,6 @@ terraform {
   backend "gcs" {
     bucket = "tf-viet-testing"
     prefix = "tfstate-kubernetes"
-
-    workspaces {
-      name = "viet-kubernetes"
-    }
   }
 }
 
