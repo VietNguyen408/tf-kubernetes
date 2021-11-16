@@ -1,29 +1,7 @@
-variable "access_token" {
-  type = string
-}
-
 provider "google" {
   project      = "syndeno"
-  region       = "europe-west4"
+  region       = var.region
   access_token = var.access_token
-}
-
-terraform {
-  required_providers {
-    google = {
-      source  = "hashicorp/google"
-      version = ">=3.52.0"
-    }
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = ">= 2.0.0"
-    }
-  }
-
-  backend "gcs" {
-    bucket = "tf-viet-testing"
-    prefix = "tfstate-kubernetes"
-  }
 }
 
 data "google_client_config" "provider" {}
@@ -42,12 +20,16 @@ provider "kubernetes" {
   )
 }
 
-
+resource "kubernetes_namespace" "viet" {
+  metadata {
+    name = "viet"
+  }
+}
 
 resource "kubernetes_deployment" "test" {
   metadata {
     name      = "pageview-deploy"
-    namespace = "viet"
+    namespace = kubernetes_namespace.viet.id
   }
   spec {
     replicas = 3
@@ -75,7 +57,7 @@ resource "kubernetes_deployment" "test" {
 resource "kubernetes_service" "test" {
   metadata {
     name      = "pageview-svc"
-    namespace = "viet"
+    namespace = kubernetes_namespace.viet.id
   }
   spec {
     selector = {
