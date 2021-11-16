@@ -12,8 +12,4 @@ resource "helm_release" "mysql" {
   name       = "mysql"
   repository = "https://charts.bitnami.com/bitnami"
   chart      = "mysql"
-
-  values = [
-    "${file("values.yaml")}"
-  ]
 }
