@@ -9,7 +9,7 @@ provider "helm" {
 }
 
 resource "helm_release" "mysql" {
-  name       = "my-release"
+  name       = "my-mysql-release"
   repository = "https://charts.bitnami.com/bitnami"
   chart      = "mysql"
 
