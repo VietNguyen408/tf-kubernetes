@@ -17,4 +17,5 @@ resource "helm_release" "mysql" {
   values = [
     file("${path.module}/mysql-values.yaml")
   ]
+  
 }
