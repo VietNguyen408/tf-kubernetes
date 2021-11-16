@@ -11,7 +11,7 @@ provider "helm" {
 resource "helm_release" "mysql" {
   name       = "my-release"
   repository = "https://charts.bitnami.com/bitnami"
-  chart      = "bitnami/mysql"
+  chart      = "mysql"
 
 //  values = [
 //    file("${path.module}/mysql-values.yaml")
