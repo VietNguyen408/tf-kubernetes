@@ -14,23 +14,7 @@ resource "helm_release" "mysql" {
   chart      = "mysql"
   namespace = "viet"
 
-//  values = [
-//    file("${path.module}/mysql-values.yaml")
-//  ]
-
-  set {
-    name  = "cluster.enabled"
-    value = "true"
-  }
-
-  set {
-    name  = "metrics.enabled"
-    value = "true"
-  }
-
-  set {
-    name  = "service.annotations.prometheus\\.io/port"
-    value = "9127"
-    type  = "string"
-  }
+  values = [
+    file("${path.module}/mysql-values.yaml")
+  ]
 }
