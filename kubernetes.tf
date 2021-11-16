@@ -20,16 +20,11 @@ provider "kubernetes" {
   )
 }
 
-resource "kubernetes_namespace" "viet" {
-  metadata {
-    name = "viet"
-  }
-}
 
 resource "kubernetes_deployment" "test" {
   metadata {
     name      = "pageview-deploy"
-    namespace = kubernetes_namespace.viet.id
+    namespace = "viet"
   }
   spec {
     replicas = 3
@@ -57,7 +52,7 @@ resource "kubernetes_deployment" "test" {
 resource "kubernetes_service" "test" {
   metadata {
     name      = "pageview-svc"
-    namespace = kubernetes_namespace.viet.id
+    namespace = "viet"
   }
   spec {
     selector = {
