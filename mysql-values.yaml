@@ -1,3 +1,0 @@
-fullnameOverride: "viet-mysql"
-auth:
-  rootPassword: "$MYSQL_ROOT_PASSWORD"
